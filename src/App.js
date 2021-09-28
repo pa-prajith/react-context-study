@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Stage1 from "./components/Stage1";
+import Stage2 from "./components/Stage2";
+
+import { AppContext } from "./context";
+
+class App extends React.Component {
+  static contextType = AppContext;
+
+  render() {
+    const { stage } = this.context.state;
+    return (
+      <div className="wrapper">
+        <div className="center-wrapper">
+          <h1>Who pays the bill?</h1>
+          {stage === 1 ? <Stage1 /> : <Stage2 />}
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
